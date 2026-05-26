@@ -1,0 +1,786 @@
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BLACK THREAD VIBE — Tienda de Ropa Unisex</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #0a0a0a;
+      --dark:    #111111;
+      --gray1:   #1c1c1c;
+      --gray2:   #2e2e2e;
+      --gray3:   #555555;
+      --gray4:   #888888;
+      --light:   #c8c8c8;
+      --white:   #f0ece6;
+      --accent:  #b8a99a;
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-serif:   'Cormorant Garamond', serif;
+      --font-body:    'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--black);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--gray3); border-radius: 2px; }
+
+    
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem 3rem;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gray2);
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      letter-spacing: 0.25em;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--light);
+      text-decoration: none;
+      position: relative;
+      transition: color 0.3s;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 1px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a:hover::after { width: 100%; }
+
+    
+    #inicio {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 80px;
+    }
+
+    .hero-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 5rem 4rem 5rem 3rem;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 8vw, 8rem);
+      line-height: 0.92;
+      letter-spacing: 0.05em;
+      color: var(--white);
+      margin-bottom: 2rem;
+    }
+
+    .hero-sub {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 300;
+      color: var(--light);
+      line-height: 1.7;
+      max-width: 380px;
+      margin-bottom: 3rem;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      border: 1px solid var(--white);
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: background 0.3s, color 0.3s;
+      width: fit-content;
+    }
+
+    .btn-primary:hover {
+      background: var(--white);
+      color: var(--black);
+    }
+
+    .hero-image {
+      position: relative;
+      overflow: hidden;
+      background: var(--gray1);
+    }
+
+    
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      filter: grayscale(30%);
+      transition: transform 6s ease;
+    }
+
+    .logo-image:hover img { transform: scale(1.04); }
+
+    .logo-tag {
+      position: absolute;
+      bottom: 2rem; left: 2rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border-left: 2px solid var(--accent);
+      padding-left: 0.8rem;
+    }
+
+  
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gray2), transparent);
+      margin: 0 3rem;
+    }
+
+    
+    #coleccion {
+      padding: 7rem 3rem;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 3.5rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gray4);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+    }
+
+    .product-card {
+      position: relative;
+      overflow: hidden;
+      background: var(--gray1);
+      aspect-ratio: 3/4;
+      cursor: pointer;
+    }
+
+    
+    .product-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(20%);
+      transition: transform 0.6s ease, filter 0.4s ease;
+    }
+
+    .product-card:hover img {
+      transform: scale(1.07);
+      filter: grayscale(0%);
+    }
+
+    .product-overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 2rem 1.5rem 1.5rem;
+      background: linear-gradient(transparent, rgba(0,0,0,0.85));
+      transform: translateY(10px);
+      opacity: 0;
+      transition: all 0.4s ease;
+    }
+
+    .product-card:hover .product-overlay {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .product-name {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+    }
+
+    .product-price {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+    }
+
+    
+    #nosotros {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 70vh;
+    }
+
+    .BLACK-image {
+      background: var(--gray1);
+      overflow: hidden;
+      position: relative;
+    }
+
+    
+    .BLACK-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(40%);
+      transition: filter 0.5s;
+    }
+
+    .BLACK-image:hover img { filter: grayscale(0%); }
+
+    .about-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 5rem 4rem;
+      background: var(--dark);
+    }
+
+    .about-eyebrow {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .about-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.25;
+      color: var(--white);
+      margin-bottom: 2rem;
+    }
+
+    .about-body {
+      font-size: 0.95rem;
+      color: var(--light);
+      line-height: 1.9;
+      max-width: 440px;
+      margin-bottom: 2rem;
+    }
+
+    .stat-row {
+      display: flex;
+      gap: 3rem;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--gray2);
+    }
+
+    .stat-item { display: flex; flex-direction: column; gap: 0.3rem; }
+
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      color: var(--white);
+      letter-spacing: 0.05em;
+    }
+
+    .stat-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gray4);
+    }
+
+    
+    #contacto {
+      padding: 7rem 3rem;
+      background: var(--gray1);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+      margin-top: 4rem;
+    }
+
+    .contact-intro {
+      font-family: var(--font-serif);
+      font-size: clamp(1.5rem, 3vw, 2.4rem);
+      font-weight: 300;
+      line-height: 1.35;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-sub {
+      font-size: 0.9rem;
+      color: var(--gray4);
+      line-height: 1.8;
+    }
+
+    .contact-links { display: flex; flex-direction: column; gap: 0.5rem; }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      padding: 1.2rem 0;
+      border-bottom: 1px solid var(--gray2);
+      text-decoration: none;
+      color: var(--light);
+      transition: all 0.3s;
+      group: true;
+    }
+
+    .contact-item:hover {
+      color: var(--white);
+      padding-left: 0.5rem;
+    }
+
+    .contact-icon {
+      width: 40px; height: 40px;
+      border: 1px solid var(--gray2);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.3s;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+    }
+
+    .contact-item:hover .contact-icon {
+      background: var(--white);
+      color: var(--black);
+      border-color: var(--white);
+    }
+
+    .contact-info { display: flex; flex-direction: column; gap: 0.2rem; }
+
+    .contact-type {
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gray4);
+    }
+
+    .contact-value {
+      font-size: 0.95rem;
+      color: var(--light);
+      transition: color 0.3s;
+    }
+
+    .contact-item:hover .contact-value { color: var(--white); }
+
+    
+    .map-wrapper {
+      margin-top: 4rem;
+      border: 1px solid var(--gray2);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .map-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    /* arreglar el src del mapa  */
+    .map-wrapper iframe {
+      width: 100%;
+      height: 280px;
+      border: none;
+      filter: grayscale(90%) invert(90%) contrast(85%);
+      display: block;
+    }
+
+    
+    footer {
+      padding: 3rem;
+      background: var(--black);
+      border-top: 1px solid var(--gray2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      letter-spacing: 0.25em;
+      color: var(--white);
+    }
+
+    .footer-copy {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: var(--gray4);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray4);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover { color: var(--white); }
+
+    
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.2rem; }
+      .nav-links a { font-size: 0.65rem; }
+
+      #inicio { grid-template-columns: 1fr; }
+      .hero-text { padding: 3rem 1.5rem; }
+      .hero-image { height: 55vh; }
+
+      .products-grid { grid-template-columns: 1fr 1fr; }
+
+      #nosotros { grid-template-columns: 1fr; }
+      .about-image { height: 50vh; }
+      .about-text { padding: 3rem 1.5rem; }
+
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+
+      #coleccion { padding: 4rem 1.5rem; }
+      #contacto { padding: 4rem 1.5rem; }
+
+      footer {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem 1.5rem;
+      }
+    }
+
+  
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-eyebrow { animation: fadeUp 0.8s ease 0.2s both; }
+    .hero-title   { animation: fadeUp 0.8s ease 0.4s both; }
+    .hero-sub     { animation: fadeUp 0.8s ease 0.6s both; }
+    .btn-primary  { animation: fadeUp 0.8s ease 0.8s both; }
+  </style>
+</head>
+<body>
+
+
+  <nav>
+    
+    <a href="#inicio" class="nav-logo">BLACK THREAD VIBE</a>
+    <ul class="nav-links">
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#coleccion">Coleccion</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
+  
+  <section id="inicio">
+    <div class="hero-text">
+      <p class="hero-eyebrow">Nueva coleccion 2026/2027</p>
+      
+      <h1 class="hero-title">VISTE<br>SIN<br>GENERO</h1>
+      <p class="hero-sub">
+        La marca que finalmente entiende que el estilo no tiene género.
+        Una oda a la arquitectura textil urbana.
+      </p>
+      <a href="#coleccion" class="btn-primary">Ver coleccion</a>
+    </div>
+
+    <div class="hero-image">
+      
+      <img src="assets/img/logo_Black1.jpg" alt="Coleccion principal" />
+      <span class="hero-tag">Coleccion Esencial 2026/2027</span>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  
+  <section id="coleccion">
+    <div class="section-header">
+      <h2 class="section-title">COLECCION</h2>
+      <span class="section-label">Temporada actual</span>
+    </div>
+
+    <div class="products-grid">
+
+      
+      <div class="product-card">
+        <img src="assets/img/chaqueta_oversize.jpg" alt="Producto 1" />
+        <div class="product-overlay">
+          <p class="product-name">Chaqueta Oversize</p>
+          <p class="product-price">$ 1.890 RD</p>
+        </div>
+      </div>
+
+      
+      <div class="product-card">
+        <img src="assets/img/pantalon-wide.jpg" alt="Producto 2" />
+        <div class="product-overlay">
+          <p class="product-name">Pantalon Wide Leg</p>
+          <p class="product-price">$ 1.650 RD</p>
+        </div>
+      </div>
+
+      
+      <div class="product-card">
+        <img src="assets/img/Camisa-Basica.jpg" alt="Producto 3" />
+        <div class="product-overlay">
+          <p class="product-name">Camiseta Basica</p>
+          <p class="product-price">$ 1.320 RD</p>
+        </div>
+      </div>
+
+      
+      <div class="product-card">
+        <img src="assets/img/Sudadera-Cropped.jpg" alt="Producto 4" />
+        <div class="product-overlay">
+          <p class="product-name">Sudadera Cropped</p>
+          <p class="product-price">$ 800 RD</p>
+        </div>
+      </div>
+
+      
+      <div class="product-card">
+        <img src="assets/img/Short-crgo.jpg" alt="Producto 5" />
+        <div class="product-overlay">
+          <p class="product-name">Shorts Cargo</p>
+          <p class="product-price">$ 1.390 RD</p>
+        </div>
+      </div>
+
+      
+      <div class="product-card">
+        <img src="assets/img/abrigo-minimalista.jpg" alt="Producto 6" />
+        <div class="product-overlay">
+          <p class="product-name">Abrigo Minimalista</p>
+          <p class="product-price">$ 2.000 RD</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <section id="nosotros">
+    <div class="about-image">
+      
+      <img src="assets/img/black_thread_vibe.jpg" alt="Nuestra tienda" />
+    </div>
+    <div class="about-text">
+      <p class="about-eyebrow">Quienes somos</p>
+      
+      <h2 class="about-title">Sus texturas crudas son el nuevo estandar de la calle</h2>
+      <p class="about-body">
+        No seguimos tendencias, las destruimos. BLACK THREAD VIBE nace del asfalto y la autenticidad.
+        Ropa unisex diseñada para quienes no piden permiso ni buscan encajar. 
+        Esto no es moda, es una declaración de principios.
+      </p>
+      <p class="about-body">
+     Estamos orgullosos de nuestras raices
+    </p>
+      <div class="stat-row">
+        <div class="stat-item">
+          <span class="stat-num">5+</span>
+          <span class="stat-label">Años de experiencia</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">200+</span>
+          <span class="stat-label">Prendas disponibles</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">1K+</span>
+          <span class="stat-label">Clientes satisfechos</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section id="contacto">
+    <div class="section-header">
+      <h2 class="section-title">CONTACTO</h2>
+      <span class="section-label">Estamos para ti</span>
+    </div>
+
+    <div class="contact-grid">
+
+      <div>
+        <p class="contact-intro">
+          Visitanos, escribenos o siguenos. Estamos donde tu estas.
+        </p>
+        <p class="contact-sub">
+          Nuestras piezas son de edicion limitada. Los peddidos
+          se gestionan exclusivamente a través de nuestras redes sociales.
+        </p>
+      </div>
+
+      <div class="contact-links">
+
+        <a class="contact-item"
+           href="https://wa.me/849XXXXXXXXXX"
+           target="_blank" rel="noopener">
+          <div class="contact-icon">WA</div>
+          <div class="contact-info">
+            <span class="contact-type">WhatsApp</span>
+            <span class="contact-value">1 849 XXX XXXX</span>
+          </div>
+        </a>
+
+      
+        <a class="contact-item"
+           href="https://instagram.com/nombredeusuario"
+           target="_blank" rel="noopener">
+          <div class="contact-icon">IG</div>
+          <div class="contact-info">
+            <span class="contact-type">Instagram</span>
+            <span class="contact-value">@nombredeusuario</span>
+          </div>
+        </a>
+
+        
+        <a class="contact-item"
+           href="mailto:correo@gmail.com">
+          <div class="contact-icon">M</div>
+          <div class="contact-info">
+            <span class="contact-type">Correo electronico</span>
+            <span class="contact-value">correo@gmail.com</span>
+          </div>
+        </a>
+
+      
+        <a class="contact-item"
+           href="https://facebook.com/Facebook"
+           target="_blank" rel="noopener">
+          <div class="contact-icon">FB</div>
+          <div class="contact-info">
+            <span class="contact-type">Facebook</span>
+            <span class="contact-value">Facebook</span>
+          </div>
+        </a>
+
+        
+        <a class="contact-item"
+           href="https://maps.app.goo.gl/VRigNq2qSkR8tMiy8=TU+DIRECCION"
+           target="_blank" rel="noopener">
+          <div class="contact-icon">MAP</div>
+          <div class="contact-info">
+            <span class="contact-type">Ubicacion</span>
+            <span class="contact-value">Ubicacion</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    /* arreglar el src del mapa  */
+    <div style="margin-top:4rem;">
+      <p class="map-label">Donde encontrarnos</p>
+      <div class="map-wrapper">
+        
+        <iframe
+          src="<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30272.017573066798!2d-69.97742872568358!3d18.483559700000022!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8eaf89ec5148da81%3A0xd795dd4b26306a90!2sAgora%20Mall!5e0!3m2!1ses!2sdo!4v1779729123331!5m2!1ses!2sdo=""iframe
+          loading="lazy">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  
+  <footer>
+    
+    <span class="footer-logo">BLACK THREAD VIBE</span>
+    <span class="footer-copy">2026/2027 BLACK THREAD VIBE — Todos los derechos reservados</span>
+    <ul class="footer-links">
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#coleccion">Coleccion</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </footer>
+
+</body>
+</html>
